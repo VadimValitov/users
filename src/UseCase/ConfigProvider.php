@@ -23,6 +23,7 @@ class ConfigProvider
             ],
             'factories'  => [
                 Handler\CreateUserHandler::class => Handler\CreateUserHandlerFactory::class,
+                Handler\GetUserHandler::class => Handler\GetUserHandlerFactory::class,
                 Handler\UpdateUserHandler::class => Handler\UpdateUserHandlerFactory::class,
                 Service\UserCheckingService::class => Service\UserCheckingServiceFactory::class,
             ],

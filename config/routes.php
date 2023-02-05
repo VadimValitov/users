@@ -39,5 +39,6 @@ use Psr\Container\ContainerInterface;
 
 return static function (Application $app, MiddlewareFactory $factory, ContainerInterface $container): void {
     $app->post('/user', App\UserInterface\Controller\CreateUserController::class, 'create-user');
+    $app->get('/user/{id}', App\UserInterface\Controller\GetUserController::class, 'get-user');
     $app->put('/user/{id}', App\UserInterface\Controller\UpdateUserController::class, 'update-user');
 };
