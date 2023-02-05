@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Domain\Entity;
 
+use App\Domain\Exception\WrongDeletingDateTimeException;
 use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -75,6 +76,10 @@ class User
 
     public function setDeleted(DateTime $deleted): void
     {
+        if ($deleted < $this->created) {
+            throw new WrongDeletingDateTimeException();
+        }
+
         $this->deleted = $deleted;
     }
 

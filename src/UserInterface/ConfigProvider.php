@@ -22,6 +22,7 @@ class ConfigProvider
             ],
             'factories'  => [
                 Controller\CreateUserController::class => Controller\CreateUserControllerFactory::class,
+                Controller\DeleteUserController::class => Controller\DeleteUserControllerFactory::class,
                 Controller\GetUserController::class => Controller\GetUserControllerFactory::class,
                 Controller\UpdateUserController::class => Controller\UpdateUserControllerFactory::class,
             ],

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace DomainTest\Entity;
 
 use App\Domain\Entity\User;
+use App\Domain\Exception\WrongDeletingDateTimeException;
 use DateTime;
 use PHPUnit\Framework\TestCase;
 
@@ -39,7 +40,17 @@ class UserTest extends TestCase
         self::assertEquals($notes, $user->getNotes());
     }
 
-    public function testDelete(): void
+    public function testFailDelete(): void
+    {
+        $user = new User('', '', '');
+        $deleted = new DateTime('-1 minute');
+
+        self::expectException(WrongDeletingDateTimeException::class);
+
+        $user->setDeleted($deleted);
+    }
+
+    public function testSuccessDelete(): void
     {
         $user = new User('', '', '');
         $deleted = new DateTime();
