@@ -24,7 +24,7 @@ class UpdateUserHandler
     {
         $user = $this->userRepository->find($dto->id);
 
-        if (!$user) {
+        if (!$user || !$user->isActive()) {
             throw new UserNotFoundException();
         }
 
