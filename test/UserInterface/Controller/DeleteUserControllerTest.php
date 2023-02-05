@@ -4,33 +4,34 @@ declare(strict_types=1);
 
 namespace UserInterfaceTest\Controller;
 
+use App\Domain\Exception\WrongDeletingDateTimeException;
 use App\UseCase\Exception\UserNotFoundException;
-use App\UseCase\Handler\GetUserHandler;
-use App\UserInterface\Controller\GetUserController;
-use App\UserInterface\View\SingleErrorView;
+use App\UseCase\Handler\DeleteUserHandler;
+use App\UserInterface\Controller\DeleteUserController;
+use Laminas\Diactoros\Response\EmptyResponse;
 use Laminas\Diactoros\Response\JsonResponse;
 use Laminas\Http\Response;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\ServerRequestInterface;
 
-class GetUserControllerTest extends TestCase
+class DeleteUserControllerTest extends TestCase
 {
-    private GetUserController $controller;
+    private DeleteUserController $controller;
 
-    private GetUserHandler&MockObject $handler;
+    private DeleteUserHandler&MockObject $handler;
 
     private ServerRequestInterface&MockObject $request;
 
     protected function setUp(): void
     {
-        $this->handler = $this->createMock(GetUserHandler::class);
+        $this->handler = $this->createMock(DeleteUserHandler::class);
         $this->request = $this->createMock(ServerRequestInterface::class);
 
         $this->request->method('getAttribute')
             ->willReturn(1);
 
-        $this->controller = new GetUserController(
+        $this->controller = new DeleteUserController(
             $this->handler,
         );
     }
@@ -46,11 +47,9 @@ class GetUserControllerTest extends TestCase
             ->willThrowException($exception);
 
         $response = $this->controller->handle($this->request);
-        $expectedResult = new SingleErrorView($exception->getMessage());
 
         self::assertInstanceOf(JsonResponse::class, $response);
         self::assertEquals($errorCode, $response->getStatusCode());
-        self::assertEquals($expectedResult->toArray(), $response->getPayload()->toArray());
     }
 
     public function testSuccess(): void
@@ -60,8 +59,8 @@ class GetUserControllerTest extends TestCase
 
         $response = $this->controller->handle($this->request);
 
-        self::assertInstanceOf(JsonResponse::class, $response);
-        self::assertEquals(Response::STATUS_CODE_200, $response->getStatusCode());
+        self::assertInstanceOf(EmptyResponse::class, $response);
+        self::assertEquals(Response::STATUS_CODE_204, $response->getStatusCode());
     }
 
     private function getExceptionClass(): array
@@ -70,6 +69,10 @@ class GetUserControllerTest extends TestCase
             [
                 'exceptionClass' => UserNotFoundException::class,
                 'errorCode' => Response::STATUS_CODE_404,
+            ],
+            [
+                'exceptionClass' => WrongDeletingDateTimeException::class,
+                'errorCode' => Response::STATUS_CODE_500,
             ],
         ];
     }
