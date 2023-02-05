@@ -17,7 +17,7 @@ class UserCheckingService
     ) {
     }
 
-    public function check(string $name, string $email, ?int $userId = null): void
+    public function check(string $name, string $email, ?int $userId = null): bool
     {
         $this->checkName($name);
         $this->checkEmailDomain($email);
@@ -33,6 +33,8 @@ class UserCheckingService
         if ($user && $user->getId() !== $userId) {
             throw new EmailExistsException();
         }
+
+        return true;
     }
 
     /**

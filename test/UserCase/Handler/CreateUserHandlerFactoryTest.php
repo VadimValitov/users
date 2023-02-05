@@ -7,6 +7,7 @@ namespace UseCaseTest\Handler;
 use App\Domain\Repository\UserRepository;
 use App\UseCase\Handler\CreateUserHandler;
 use App\UseCase\Handler\CreateUserHandlerFactory;
+use App\UseCase\Service\UserCheckingService;
 use Doctrine\ORM\EntityManager;
 use PHPUnit\Framework\TestCase;
 use Psr\Container\ContainerInterface;
@@ -15,6 +16,7 @@ class CreateUserHandlerFactoryTest extends TestCase
 {
     public function testSuccess()
     {
+        $userCheckingService = $this->createMock(UserCheckingService::class);
         $userRepository = $this->createMock(UserRepository::class);
         $entityManager = $this->createMock(EntityManager::class);
 
@@ -22,6 +24,7 @@ class CreateUserHandlerFactoryTest extends TestCase
         $container->method('get')
             ->willReturnMap(
                 [
+                    [UserCheckingService::class, $userCheckingService],
                     [UserRepository::class, $userRepository],
                     [EntityManager::class, $entityManager],
                 ]
