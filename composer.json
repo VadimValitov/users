@@ -73,6 +73,7 @@
     },
     "autoload-dev": {
         "psr-4": {
+            "DomainTest\\": "test/Domain/",
             "UserInterfaceTest\\": "test/UserInterface/",
             "UseCaseTest\\": "test/UserCase/"
         }

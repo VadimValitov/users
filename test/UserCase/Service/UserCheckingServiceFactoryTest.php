@@ -12,7 +12,7 @@ use Psr\Container\ContainerInterface;
 
 class UserCheckingServiceFactoryTest extends TestCase
 {
-    public function testSuccess()
+    public function testSuccess(): void
     {
         $userRepository = $this->createMock(UserRepository::class);
 

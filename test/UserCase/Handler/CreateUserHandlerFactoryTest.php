@@ -14,7 +14,7 @@ use Psr\Container\ContainerInterface;
 
 class CreateUserHandlerFactoryTest extends TestCase
 {
-    public function testSuccess()
+    public function testSuccess(): void
     {
         $userCheckingService = $this->createMock(UserCheckingService::class);
         $userRepository = $this->createMock(UserRepository::class);

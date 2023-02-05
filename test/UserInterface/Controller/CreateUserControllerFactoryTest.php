@@ -12,7 +12,7 @@ use Psr\Container\ContainerInterface;
 
 class CreateUserControllerFactoryTest extends TestCase
 {
-    public function testSuccess()
+    public function testSuccess(): void
     {
         $handler = $this->createMock(CreateUserHandler::class);
 

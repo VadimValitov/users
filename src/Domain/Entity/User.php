@@ -73,6 +73,11 @@ class User
         return $this->deleted;
     }
 
+    public function setDeleted(DateTime $deleted): void
+    {
+        $this->deleted = $deleted;
+    }
+
     public function isActive(): bool
     {
         return !$this->getDeleted();
