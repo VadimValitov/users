@@ -7,6 +7,7 @@ namespace UseCaseTest\Handler;
 use App\Domain\Entity\User;
 use App\Domain\Repository\UserRepository;
 use App\UseCase\Dto\UpdateUserHandlerDto;
+use App\UseCase\Exception\UserNotFoundException;
 use App\UseCase\Handler\UpdateUserHandler;
 use App\UseCase\Service\UserCheckingService;
 use Doctrine\ORM\EntityManager;
@@ -39,10 +40,7 @@ class UpdateUserHandlerTest extends TestCase
 
     public function testFailWhenUserNotFound(): void
     {
-        $this->userCheckingService->method('check')
-            ->willThrowException(new Exception());
-
-        self::expectException(Exception::class);
+        self::expectException(UserNotFoundException::class);
 
         $dto = new UpdateUserHandlerDto(
             1,
