@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace UserInterfaceTest\Controller;
 
-use App\Domain\Entity\User;
 use App\UseCase\Exception\EmailExistsException;
 use App\UseCase\Exception\UserNameExistsException;
 use App\UseCase\Exception\WrongEmailException;
@@ -34,8 +33,6 @@ class CreateUserControllerTest extends TestCase
         $this->handler = $this->createMock(CreateUserHandler::class);
         $this->validator = $this->createMock(UserDataValidator::class);
         $this->request = $this->createMock(ServerRequestInterface::class);
-
-        $user = $this->createMock(User::class);
 
         $this->controller = new CreateUserController(
             $this->handler,

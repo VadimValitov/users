@@ -57,7 +57,7 @@ class CreateUserHandler
      */
     private function checkName(string $name): void
     {
-        if (str_contains($name, 'badname1')) {
+        if (str_contains($name, 'badusername')) {
             throw new WrongNameException();
         }
     }
