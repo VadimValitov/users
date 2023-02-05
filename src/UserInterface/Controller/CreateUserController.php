@@ -10,7 +10,7 @@ use App\UseCase\Exception\UserNameExistsException;
 use App\UseCase\Exception\WrongEmailException;
 use App\UseCase\Exception\WrongNameException;
 use App\UseCase\Handler\CreateUserHandler;
-use App\UserInterface\Validator\CreateUserValidator;
+use App\UserInterface\Validator\UserDataValidator;
 use App\UserInterface\View\ErrorsView;
 use App\UserInterface\View\SingleErrorView;
 use App\UserInterface\View\UserView;
@@ -24,7 +24,7 @@ class CreateUserController implements RequestHandlerInterface
 {
     public function __construct(
         private CreateUserHandler $handler,
-        private CreateUserValidator $validator
+        private UserDataValidator $validator
     ) {
     }
 

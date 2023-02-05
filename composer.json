@@ -73,7 +73,7 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "AppTest\\": "test/AppTest/"
+            "UserInterfaceTest\\": "test/UserInterface/"
         }
     },
     "scripts": {

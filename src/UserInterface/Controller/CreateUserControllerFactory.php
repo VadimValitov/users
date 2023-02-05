@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\UserInterface\Controller;
 
 use App\UseCase\Handler\CreateUserHandler;
-use App\UserInterface\Validator\CreateUserValidator;
+use App\UserInterface\Validator\UserDataValidator;
 use Psr\Container\ContainerInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 
@@ -15,7 +15,7 @@ class CreateUserControllerFactory
     {
         return new CreateUserController(
             $container->get(CreateUserHandler::class),
-            new CreateUserValidator(),
+            new UserDataValidator(),
         );
     }
 }

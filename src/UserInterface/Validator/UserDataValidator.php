@@ -10,7 +10,7 @@ use Laminas\Validator\EmailAddress;
 use Laminas\Validator\Regex;
 use Laminas\Validator\StringLength;
 
-class CreateUserValidator extends Validator
+class UserDataValidator extends Validator
 {
     protected function configureOptions(): void
     {
