@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\UseCase;
 
 use App\UseCase\Handler;
+use App\UseCase\Service;
 
 class ConfigProvider
 {
@@ -22,6 +23,8 @@ class ConfigProvider
             ],
             'factories'  => [
                 Handler\CreateUserHandler::class => Handler\CreateUserHandlerFactory::class,
+                Handler\UpdateUserHandler::class => Handler\UpdateUserHandlerFactory::class,
+                Service\UserCheckingService::class => Service\UserCheckingServiceFactory::class,
             ],
         ];
     }

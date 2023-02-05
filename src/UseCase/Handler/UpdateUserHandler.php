@@ -6,11 +6,12 @@ namespace App\UseCase\Handler;
 
 use App\Domain\Entity\User;
 use App\Domain\Repository\UserRepository;
-use App\UseCase\Dto\CreateUserHandlerDto;
+use App\UseCase\Dto\UpdateUserHandlerDto;
+use App\UseCase\Exception\UserNotFoundException;
 use App\UseCase\Service\UserCheckingService;
 use Doctrine\ORM\EntityManager;
 
-class CreateUserHandler
+class UpdateUserHandler
 {
     public function __construct(
         private readonly UserCheckingService $userCheckingService,
@@ -19,17 +20,22 @@ class CreateUserHandler
     ) {
     }
 
-    public function handle(CreateUserHandlerDto $dto): User
+    public function handle(UpdateUserHandlerDto $dto): User
     {
-        $this->userCheckingService->check($dto->name, $dto->email);
+        $user = $this->userRepository->find($dto->id);
 
-        $user = new User(
+        if (!$user) {
+            throw new UserNotFoundException();
+        }
+
+        $this->userCheckingService->check($dto->name, $dto->email, $user->getId());
+
+        $user->update(
             $dto->name,
             $dto->email,
             $dto->notes,
         );
 
-        $this->userRepository->add($user);
         $this->entityManager->flush();
 
         return $user;

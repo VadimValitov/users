@@ -9,11 +9,11 @@ use App\UseCase\Service\UserCheckingService;
 use Doctrine\ORM\EntityManager;
 use Psr\Container\ContainerInterface;
 
-class CreateUserHandlerFactory
+class UpdateUserHandlerFactory
 {
-    public function __invoke(ContainerInterface $container): CreateUserHandler
+    public function __invoke(ContainerInterface $container): UpdateUserHandler
     {
-        return new CreateUserHandler(
+        return new UpdateUserHandler(
             $container->get(UserCheckingService::class),
             $container->get(UserRepository::class),
             $container->get(EntityManager::class),
