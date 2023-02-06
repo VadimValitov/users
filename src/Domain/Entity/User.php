@@ -10,7 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity]
 #[ORM\Table(
-    name: 'user',
+    name: 'users',
     options: ["collation" => "utf8mb4_unicode_ci", "charset" => "utf8mb4"]
 )]
 #[ORM\UniqueConstraint(name: 'users_email_uindex', columns: ['email'])]

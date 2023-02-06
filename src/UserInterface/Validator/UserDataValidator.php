@@ -34,7 +34,9 @@ class UserDataValidator extends Validator
         $notes = new Input('notes');
         $notes->setBreakOnFailure(false)
             ->setRequired(false)
-            ->setFallbackValue(null);
+            ->setFallbackValue(null)
+            ->getValidatorChain()
+            ->attach(new StringLength(['max' => 256]));
 
         $this->inputFilter->add($notes);
     }
