@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Infrastructure;
 
 use App\Domain\Repository\UserRepository;
+use App\Infrastructure\EventSubscriber;
 use App\Infrastructure\Repository;
 
 class ConfigProvider
@@ -13,6 +14,15 @@ class ConfigProvider
     {
         return [
             'dependencies' => $this->getDependencies(),
+            'doctrine' => [
+                'eventmanager' => [
+                    'orm_default' => [
+                        'subscribers' => [
+                            EventSubscriber\UserEventSubscriber::class,
+                        ],
+                    ],
+                ]
+            ]
         ];
     }
 
@@ -25,6 +35,7 @@ class ConfigProvider
             'invokables' => [
             ],
             'factories'  => [
+                EventSubscriber\UserEventSubscriber::class => EventSubscriber\UserEventSubscriberFactory::class,
                 Repository\DoctrineUserRepository::class => Repository\DoctrineUserRepositoryFactory::class,
             ],
         ];

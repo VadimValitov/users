@@ -1,0 +1,25 @@
+### Create
+POST http://localhost/user
+Content-Type: application/json
+
+{
+  "name": "username1",
+  "email": "email1@local.ru",
+  "notes": "notes text"
+}
+
+### Get
+GET http://localhost/user/1
+
+### Update
+PUT http://localhost/user/1
+Content-Type: application/json
+
+{
+  "name": "username",
+  "email": "email@local.ru",
+  "notes": "notes text"
+}
+
+### Delete
+DELETE http://localhost/user/1
